@@ -2,7 +2,7 @@
 <resources>
 
     <!-- LIST BORDER COLOR -->
-    <color name="cell_border">#FFD3D3D3</color>
+    <color name="cell_border">#666666</color>
 
     <!-- ITEM BACKGROUND COLOR - LINE - DEFAULT -->
     <color name="base_start_color_line_default">#FFFFFFFF</color>

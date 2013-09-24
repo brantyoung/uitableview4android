@@ -9,7 +9,9 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.TouchDelegate;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import fr.days.android.uitableview.R;
 import fr.days.android.uitableview.adapter.UITableViewInternalAccessoryListener;
@@ -29,6 +31,7 @@ public class UITableCellView extends UITableItemView {
 	private TextView titleView;
 	private TextView subtitleView;
 	private ImageView accessoryView;
+    private ViewGroup cellContainerLayout;
 	private UITableViewInternalAccessoryListener internalAccessoryListener;
 
 	public UITableCellView(Context context, IndexPath indexPath) {
@@ -49,6 +52,7 @@ public class UITableCellView extends UITableItemView {
 		titleView = (TextView) findViewById(R.id.title);
 		subtitleView = (TextView) findViewById(R.id.subtitle);
 		accessoryView = (ImageView) findViewById(R.id.accessory);
+        cellContainerLayout = (ViewGroup) findViewById(R.id.cellContainer);
 
 		// Set default color
 		setDefaultBackgroundColor();
@@ -154,6 +158,10 @@ public class UITableCellView extends UITableItemView {
 		}
 	}
 
+    public ViewGroup getCellContainerLayout() {
+        return cellContainerLayout;
+    }
+
 	public void setDefaultBackgroundColor() {
 		setBackgroundColor(colorLineDefault, colorLinePressed);
 	}
@@ -162,12 +170,12 @@ public class UITableCellView extends UITableItemView {
 		// Assign the right backgroundDrawable according to the cell's position in the group
 		Drawable backgroundDrawable;
 		if (indexPath.getRowsCount() == 1) {
-			backgroundDrawable = new UITableCellDrawable(10.0f, 10.0f, colorDefault, colorPressed, borderColor);
+			backgroundDrawable = new UITableCellDrawable(0.0f, 0.0f, colorDefault, colorPressed, borderColor);
 		} else {
 			if (indexPath.isFirstCellOfGroup()) {
-				backgroundDrawable = new UITableCellDrawable(10.0f, 0, colorDefault, colorPressed, borderColor);
+				backgroundDrawable = new UITableCellDrawable(0.0f, 0, colorDefault, colorPressed, borderColor);
 			} else if (indexPath.isLastCellOfGroup()) {
-				backgroundDrawable = new UITableCellDrawable(0, 10.0f, colorDefault, colorPressed, borderColor);
+				backgroundDrawable = new UITableCellDrawable(0, 0.0f, colorDefault, colorPressed, borderColor);
 			} else {
 				backgroundDrawable = new UITableCellDrawable(0, 0, colorDefault, colorPressed, borderColor);
 			}
