@@ -133,4 +133,7 @@ public class UITableView extends ListView implements android.widget.AdapterView.
 		return false;
 	}
 
+    public void notifyDataSetChanged() {
+        tableViewAdapterInternal.notifyDataSetChanged();
+    }
 }
