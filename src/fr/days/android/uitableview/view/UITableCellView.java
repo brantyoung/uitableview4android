@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.TouchDelegate;
 import android.view.View;
@@ -34,7 +35,8 @@ public class UITableCellView extends UITableItemView {
 
 	private ImageView imageView;
 	private TextView titleView;
-	private BadgeView subtitleView;
+	private TextView subtitleView;
+    private BadgeView badgerView;
 	private ImageView accessoryView;
     private ViewGroup cellContainerLayout;
 	private UITableViewInternalAccessoryListener internalAccessoryListener;
@@ -55,13 +57,14 @@ public class UITableCellView extends UITableItemView {
 
 		imageView = (ImageView) findViewById(R.id.image);
 		titleView = (TextView) findViewById(R.id.title);
-		subtitleView = (BadgeView) findViewById(R.id.subtitle);
+		subtitleView = (TextView) findViewById(R.id.subtitle);
 		accessoryView = (ImageView) findViewById(R.id.accessory);
         cellContainerLayout = (ViewGroup) findViewById(R.id.cellContainer);
 
-        subtitleView.setTextSize(17);
-        subtitleView.setBadgePosition(BadgeView.POSITION_CENTER);
-        subtitleView.setBadgeBackgroundColor(Color.parseColor("#FF4400"));
+        badgerView = (BadgeView) findViewById(R.id.badger);
+        badgerView.setBadgePosition(BadgeView.POSITION_CENTER);
+        badgerView.setBadgeBackgroundColor(Color.parseColor("#FF4400"));
+        badgerView.setPadding(dipToPixel(context, 10), 0, dipToPixel(context, 10), 0);
 
 		// Set default color
 		setDefaultBackgroundColor();
@@ -70,10 +73,16 @@ public class UITableCellView extends UITableItemView {
 		post(getTouchDelegateAction(this, accessoryView, 30, 30, 30, 30));
 	}
 
-	public UITableCellView(Context context, IndexPath indexPath, String title, String subtitle) {
+    public static int dipToPixel(Context context, float dips) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        return (int)((dips * displayMetrics.density) + 0.5);
+    }
+
+	public UITableCellView(Context context, IndexPath indexPath, String title, String subtitle, String badger) {
 		this(context, indexPath);
 		setTitle(title);
 		setSubtitle(subtitle);
+        setBadger(badger);
 	}
 
 	private int getColor(int colorId) {
@@ -139,6 +148,23 @@ public class UITableCellView extends UITableItemView {
 			subtitleView.setText(subtitle);
 		}
 	}
+
+    public TextView getBadgerView() {
+        return badgerView;
+    }
+
+    public String getBadger() {
+        return badgerView.getText().toString();
+    }
+
+    public void setBadger(String badger) {
+        if (TextUtils.isEmpty(badger)) {
+            badgerView.setVisibility(View.GONE);
+        } else {
+            badgerView.setVisibility(View.VISIBLE);
+            badgerView.setText(badger);
+        }
+    }
 
 	public ImageView getAccessoryView() {
 		return accessoryView;

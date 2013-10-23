@@ -26,7 +26,7 @@
             android:textSize="16.0dp"
             android:textStyle="bold" />
 
-        <com.readystatesoftware.viewbadger.BadgeView
+        <TextView
             android:id="@+id/subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,6 +36,17 @@
             android:singleLine="true"
             android:textColor="@color/text_color_selector"
             android:textSize="12.0dp"
+            android:visibility="gone" />
+
+        <com.readystatesoftware.viewbadger.BadgeView
+            android:id="@+id/badger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="32dp"
+            android:layout_alignParentRight="true"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="17.0dp"
             android:visibility="gone" />
     </LinearLayout>
 

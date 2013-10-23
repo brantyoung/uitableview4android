@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 public class UITableCellItem extends UITableItem {
 
 	public String subtitle;
+    public String badger;
 
 	public int imageInt;
 	public Drawable imageDrawable;
@@ -18,9 +19,10 @@ public class UITableCellItem extends UITableItem {
 		super(null);
 	}
 
-	public UITableCellItem(String title, String subtitle) {
+	public UITableCellItem(String title, String subtitle, String badger) {
 		super(title);
 		this.subtitle = subtitle;
+        this.badger = badger;
 	}
 
 }
