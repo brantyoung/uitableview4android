@@ -2,7 +2,9 @@ package fr.days.android.uitableview.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 import android.text.TextUtils;
@@ -13,6 +15,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.readystatesoftware.viewbadger.BadgeView;
+
 import fr.days.android.uitableview.R;
 import fr.days.android.uitableview.adapter.UITableViewInternalAccessoryListener;
 import fr.days.android.uitableview.drawable.UITableCellDrawable;
@@ -29,7 +34,7 @@ public class UITableCellView extends UITableItemView {
 
 	private ImageView imageView;
 	private TextView titleView;
-	private TextView subtitleView;
+	private BadgeView subtitleView;
 	private ImageView accessoryView;
     private ViewGroup cellContainerLayout;
 	private UITableViewInternalAccessoryListener internalAccessoryListener;
@@ -50,9 +55,13 @@ public class UITableCellView extends UITableItemView {
 
 		imageView = (ImageView) findViewById(R.id.image);
 		titleView = (TextView) findViewById(R.id.title);
-		subtitleView = (TextView) findViewById(R.id.subtitle);
+		subtitleView = (BadgeView) findViewById(R.id.subtitle);
 		accessoryView = (ImageView) findViewById(R.id.accessory);
         cellContainerLayout = (ViewGroup) findViewById(R.id.cellContainer);
+
+        subtitleView.setTextSize(17);
+        subtitleView.setBadgePosition(BadgeView.POSITION_CENTER);
+        subtitleView.setBadgeBackgroundColor(Color.parseColor("#FF4400"));
 
 		// Set default color
 		setDefaultBackgroundColor();

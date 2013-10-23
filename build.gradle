@@ -33,3 +33,9 @@ android {
         }
     }
 }
+
+dependencies {
+    compile files(
+            'libs/android-viewbadger.jar',
+    )
+}
